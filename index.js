@@ -25,9 +25,9 @@ async function removeDups() {
         dupCount++;
       }
       if (count + dupCount == total) {
-        console.log("Done.");
-        console.log("Inserted " + count + " unique documents.");
-        console.log("Removed " + dupCount + " duplicate documents.");
+        console.log("Inserted " + count + " unique documents and removed "+ dupCount+" duplicates.");
+        await DB.renameCollection(process.env.COLL_NAME,"temp_collection_review")
+        await DB.renameCollection(process.env.TEMP_COLL_NAME,process.env.COLL_NAME)
         client.close();
         process.exit(1);
       }
