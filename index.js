@@ -10,7 +10,7 @@ async function removeDups() {
     const DB = client.db(process.env.DB_NAME);
     const coll = DB.collection(process.env.COLL_NAME);
     const tempColl = DB.collection(process.env.TEMP_COLL_NAME);
-    await tempColl.createIndex({ name: 1 }, { unique: true });
+    await tempColl.createIndex({ [process.env.UNIQUE_FIELD]: 1 }, { unique: true });
     const data = coll.find();
     const total = await data.count();
     let count = 0;
